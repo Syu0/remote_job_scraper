@@ -1,0 +1,23 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Search Remote Jobs</h1>
+    <form action="/report" method="get" >
+      <input id="search_by" placeholder="Search for a job" type=text required name='word'/>
+      <button onclick="loadingAction()">Search</button>      
+    </form>
+    <div id="loading" style="display: none; width:100%;height:0;padding-bottom:100%;position:relative;">
+        로딩중입니다.
+    </div>
+  </body>
+  <script>
+    function loadingAction(){
+        document.getElementById("loading").style.display='block';
+        innerText  = document.getElementById("search_by").value 
+        if (String(innerText).length == 0 )
+            document.getElementById("loading").style.display='none'; 
+
+    }
+  </script>
+</html>
