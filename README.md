@@ -19,3 +19,5 @@
  
 5. last updated (2022.01.25)
 6. 개발관련 문의 (meaningful.jy@gmail.com)
+7. 사용방법
+8. flask_main.py 파일을 실행하면 127.0.0.1:5000/search로 접속할 수 있습니다.
