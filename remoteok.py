@@ -2,8 +2,10 @@
 # https://remoteok.com/
 
  
+from email.policy import default
+import aiohttp
 from bs4 import BeautifulSoup 
-import requests 
+import requests ,asyncio,aiohttp
 HOME = 'https://remoteok.com'
 headers = {
     'referer': 'https://remoteok.com/',
@@ -11,13 +13,14 @@ headers = {
 }
 
 
-def  get_jobs(search_by):
+async def  get_jobs(search_by='python'):
     jobs = []
+    async with aiohttp.ClientSession() as session:
+        URL = 'https://remoteok.com/remote-python-jobs'
+        response = await session.get(URL,headers=headers)        
+        soup = BeautifulSoup(await response.text(), 'html.parser')
     
-    URL = 'https://remoteok.com/remote-python-jobs'
-    response = requests.get(URL,headers=headers)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    
+
     tr_tags = soup.find_all('tr',{'class':'job'})    
     for tr in tr_tags :        
         job = tr.find('td',{'class':'company'})
@@ -33,6 +36,6 @@ def  get_jobs(search_by):
 
 if __name__ == "__main__":
     search_by = 'python'
-    all_jobs = get_jobs(search_by) 
-    print(all_jobs)
+    all_jobs = asyncio.run(get_jobs('nest'))
+    print(len(all_jobs))
     
